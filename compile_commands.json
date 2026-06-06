@@ -1,0 +1,17 @@
+[
+  {
+    "file": "src/flesh.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "src/flesh.c",
+      "-o",
+      "build/flesh.o"
+    ],
+    "directory": "/home/finlay/programming/C/flesh",
+    "output": "build/flesh.o"
+  }
+]

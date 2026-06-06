@@ -1,0 +1,14 @@
+---
+If:
+  PathMatch: [.*\.c, .*\.h]
+CompileFlags:
+  Add: [-std=gnu23, -xc, -Wall, -Wextra]
+  Compiler: gcc
+
+Completion:
+  AllScopes: Yes
+  ArgumentLists: FullPlaceholders
+  HeaderInsertion: IWYU
+  CodePatterns: All
+  MacroFilter: ExactPrefix
+---
