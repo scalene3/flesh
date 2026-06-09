@@ -1,6 +1,6 @@
 
 
-#include "tokenize.h"
+#include "execution.h"
 
 void promptLoop(FILE *tty) {
     for (;;) {
@@ -13,6 +13,9 @@ void promptLoop(FILE *tty) {
             exit(EXIT_FAILURE);
         }
         TokenList tokens = tokenizeLine(line);
+
+        execTokens(tokens);
+
         printTokens(tokens);
     }
 }
