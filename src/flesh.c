@@ -3,10 +3,11 @@
 #include "execution.h"
 
 void promptLoop(FILE *tty) {
-    for (;;) {
+    while (1) {
         char *line = nullptr;
         size_t size = 0;
-
+        putchar('>');
+        putchar(' ');
         ssize_t nread = getline(&line, &size, tty);
         if (nread == -1) {
             perror("getline");
@@ -14,9 +15,8 @@ void promptLoop(FILE *tty) {
         }
         TokenList tokens = tokenizeLine(line);
 
-        execTokens(tokens);
-
-        printTokens(tokens);
+        int exit = execTokens(tokens);
+        printf("exit code: %d\n", exit);
     }
 }
 

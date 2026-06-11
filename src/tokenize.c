@@ -97,7 +97,6 @@ TokenList tokenizeLine(char *line) {
         ++allocatedsize;
     } while (*line);
     list.size = allocatedsize;
-    printf("allocated_size: %zu\n", allocatedsize);
     list.tokens = tokens;
     return list;
 }
