@@ -1,5 +1,6 @@
 
 #include "execution.h"
+#include <errno.h>
 #include <sys/wait.h>
 
 int execTokens(TokenList list) {
@@ -19,8 +20,31 @@ int execTokens(TokenList list) {
         }
 
         if (!strcmp(args[0], "exit")) {
-                int exitcode = atoi(args[1]);
+                int exitcode = 0;
+                if (arg_count > 1) {
+                        exitcode = atoi(args[1]);
+                }
                 exit(exitcode);
+        } else if (!strcmp(args[0], "cd")) {
+                char *buf = malloc(512);
+                char *cwd = getcwd(buf, 512);
+                if (arg_count > 1) {
+                        if (!strcmp(args[1], "-")) {
+                                char *oldpwd = getenv("OLDPWD");
+                                if (chdir(oldpwd) == -1) {
+                                        perror("cd");
+                                        return errno;
+                                }
+                        } else {
+                                if (chdir(args[1]) == -1) {
+                                        perror("cd");
+                                        return errno;
+                                } else {
+                                        setenv("OLDPWD", cwd, 1);
+                                }
+                        }
+                }
+                return 0;
         }
 
         fflush(NULL);

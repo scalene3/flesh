@@ -16,7 +16,7 @@ void promptLoop(FILE *tty) {
                 TokenList tokens = tokenizeLine(line);
 
                 int exit = execTokens(tokens);
-
+                printTokens(tokens);
                 printf("exit code: %d\n", exit);
                 (void)exit;
         }

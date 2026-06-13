@@ -40,10 +40,11 @@ void skipSpace(char **line, size_t linesize) {
 Token getTokenAlphanum(char **line) {
         size_t sliceto = 1;
         while ((*line)[sliceto]) {
-                if (isalnum((*line)[sliceto])) {
-                        ++sliceto;
-                } else if ((*line)[sliceto] == '\\') {
+                char c = (*line)[sliceto];
+                if (c == '\\') {
                         sliceto += 2;
+                } else if (isgraph(c)) {
+                        ++sliceto;
                 } else {
                         break;
                 }
@@ -59,7 +60,7 @@ Token getTokenAlphanum(char **line) {
 Token getToken(char **line) {
         size_t pos = 0;
         char first = (*line)[pos];
-        if (isalnum(first) || first == '_' || first == '\\') {
+        if (isgraph(first)) {
                 return getTokenAlphanum(line);
 
         } else {
