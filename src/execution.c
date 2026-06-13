@@ -13,6 +13,8 @@ int execTokens(TokenList list) {
                         args = realloc(args, (arg_count + 1) * sizeof(char *));
                         args[arg_count] = list.tokens[i].value;
                         ++arg_count;
+                } else {
+                        return 0;
                 }
         }
 
@@ -38,6 +40,9 @@ int execTokens(TokenList list) {
                 int status = 0;
                 wait(&status);
                 int exit_status = WEXITSTATUS(status);
+                if (exit_status == 1) {
+                        printf("flesh: command not found: %s\n", args[0]);
+                }
                 return exit_status;
         }
 

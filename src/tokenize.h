@@ -8,14 +8,14 @@
 typedef enum { UNKNOWN, IDENTIFIER, END } Tag;
 
 typedef struct Token {
-    Tag tag;
-    char *value;
-    size_t valsize;
+        Tag tag;
+        char *value;
+        size_t valsize;
 } Token;
 
 typedef struct TokenList {
-    Token *tokens;
-    size_t size;
+        Token *tokens;
+        size_t size;
 } TokenList;
 
 /**

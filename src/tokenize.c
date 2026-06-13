@@ -63,7 +63,7 @@ Token getToken(char **line) {
                 return getTokenAlphanum(line);
 
         } else {
-                *line += (pos + 1);
+
                 Token token;
                 if (!first) {
 
@@ -71,7 +71,9 @@ Token getToken(char **line) {
                 } else {
                         token.tag = UNKNOWN;
                 }
+                token.valsize = 1;
                 token.value = &first;
+                ++(*line);
                 return token;
         }
 }
