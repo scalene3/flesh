@@ -34,6 +34,13 @@ char *getTagString(Tag tag);
 void printTokens(TokenList list);
 
 /**
+ * @brief Free tokens.
+ *
+ * @param list
+ */
+void freeTokens(TokenList *list);
+
+/**
  * @brief Skip initial whitespace (newline and space). Modifies line.
  *
  * @param line

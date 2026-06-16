@@ -15,15 +15,19 @@ int execTokens(TokenList list) {
                         args[arg_count] = list.tokens[i].value;
                         ++arg_count;
                 } else {
+                        free(args);
                         return 0;
                 }
         }
+
+        printf("arg_count: %zu\n", arg_count);
 
         if (!strcmp(args[0], "exit")) {
                 int exitcode = 0;
                 if (arg_count > 1) {
                         exitcode = atoi(args[1]);
                 }
+                free(args);
                 exit(exitcode);
         } else if (!strcmp(args[0], "cd")) {
                 return cd(args, arg_count);
@@ -35,6 +39,7 @@ int execTokens(TokenList list) {
         pid_t p = fork();
         if (p < 0) {
                 perror("fork");
+                free(args);
                 exit(EXIT_FAILURE);
         } else if (!p) {
 
@@ -51,8 +56,9 @@ int execTokens(TokenList list) {
                 if (exit_status == 1) {
                         printf("flesh: command not found: %s\n", args[0]);
                 }
+                free(args);
                 return exit_status;
         }
-
+        free(args);
         exit(EXIT_FAILURE);
 }

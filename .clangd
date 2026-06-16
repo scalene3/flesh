@@ -11,4 +11,3 @@ Completion:
   HeaderInsertion: IWYU
   CodePatterns: All
   MacroFilter: ExactPrefix
----
