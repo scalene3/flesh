@@ -20,7 +20,6 @@ void promptLoop(FILE *tty) {
                 freeTokens(&tokens);
                 printf("exit code: %d\n", exit);
                 (void)exit;
-
         }
 }
 
@@ -33,5 +32,6 @@ int main() {
         FILE *tty = fopen(tname, "r+");
 
         promptLoop(tty);
+        fclose(tty);
         exit(EXIT_SUCCESS);
 }

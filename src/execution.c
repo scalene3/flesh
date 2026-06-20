@@ -19,6 +19,9 @@ int execTokens(TokenList list) {
                         return 0;
                 }
         }
+        // null-terminate args
+        args = realloc(args, (arg_count + 1) * sizeof(char *));
+        args[arg_count] = nullptr;
 
         printf("arg_count: %zu\n", arg_count);
 

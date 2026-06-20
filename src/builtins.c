@@ -12,6 +12,8 @@ static int exportkv(char *arg) {
         char *key = calloc((eq - arg), 1);
         char *value = calloc(strlen(eq), 1);
         if (!key || !value) {
+                free(key);
+                free(value);
                 free(arg);
                 return -1;
         }
@@ -19,10 +21,14 @@ static int exportkv(char *arg) {
         key = memcpy(key, arg, eq - arg);
         value = memcpy(value, eq + 1, strlen(eq));
         if (!key || !value) {
+                free(key);
+                free(value);
                 free(arg);
                 return -1;
         }
         setenv(key, value, 1);
+        free(key);
+        free(value);
         return 0;
 }
 
@@ -47,6 +53,7 @@ int cd(char **args, size_t arg_count) {
                         }
                 }
         }
+        free(buf);
         free(args);
         return 0;
 }
@@ -55,7 +62,7 @@ int export(char **args, size_t arg_count) {
         if (arg_count > 1) {
                 for (size_t i = 1; i < arg_count; ++i) {
                         if (exportkv(args[i])) {
-                            free(args);
+                                free(args);
                                 return 1;
                         } else {
                                 continue;

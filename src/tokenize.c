@@ -25,8 +25,8 @@ void printTokens(TokenList list) {
 }
 
 void freeTokens(TokenList *list) {
-    free(list->tokens);
-    list = nullptr;
+        free(list->tokens);
+        list = nullptr;
 }
 
 void skipSpace(char **line, size_t linesize) {
