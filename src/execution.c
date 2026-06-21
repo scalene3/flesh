@@ -1,11 +1,12 @@
 
 #include "execution.h"
 #include "builtins.h"
+#include <stdlib.h>
 #include <sys/wait.h>
 
 int execTokens(TokenList list) {
         char **args = malloc(sizeof(char *));
-
+        int exitcode = 0;
         size_t arg_count = 0;
         for (size_t i = 0; i < list.size; ++i) {
                 // Currently ignore non-IDENTIFIER tokens
@@ -26,12 +27,11 @@ int execTokens(TokenList list) {
         printf("arg_count: %zu\n", arg_count);
 
         if (!strcmp(args[0], "exit")) {
-                int exitcode = 0;
+
                 if (arg_count > 1) {
                         exitcode = atoi(args[1]);
                 }
-                free(args);
-                exit(exitcode);
+                goto err;
         } else if (!strcmp(args[0], "cd")) {
                 return cd(args, arg_count);
         } else if (!strcmp(args[0], "export")) {
@@ -42,8 +42,8 @@ int execTokens(TokenList list) {
         pid_t p = fork();
         if (p < 0) {
                 perror("fork");
-                free(args);
-                exit(EXIT_FAILURE);
+                exitcode = EXIT_FAILURE;
+                goto err;
         } else if (!p) {
 
                 printf("args: \n");
@@ -62,6 +62,7 @@ int execTokens(TokenList list) {
                 free(args);
                 return exit_status;
         }
+err:
         free(args);
-        exit(EXIT_FAILURE);
+        exit(exitcode);
 }
