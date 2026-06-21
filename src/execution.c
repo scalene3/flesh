@@ -10,6 +10,7 @@ int execTokens(TokenList list) {
         int exitcode = 0;
 =======
 #include <errno.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 
 int execArgs(char *command, char **args) {
