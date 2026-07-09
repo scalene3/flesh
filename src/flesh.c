@@ -16,12 +16,6 @@ void promptLoop(FILE *tty) {
                 TokenList tokens = tokenizeLine(line);
                 execTokens(tokens);
                 freeTokens(&tokens);
-<<<<<<< HEAD
-                free(line);
-                printf("exit code: %d\n", exit);
-                (void)exit;
-=======
->>>>>>> 8ae5426 (Initial Commit)
         }
 }
 
