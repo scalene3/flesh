@@ -14,13 +14,14 @@ void promptLoop(FILE *tty) {
                         exit(EXIT_FAILURE);
                 }
                 TokenList tokens = tokenizeLine(line);
-
-                int exit = execTokens(tokens);
-                printTokens(tokens);
+                execTokens(tokens);
                 freeTokens(&tokens);
+<<<<<<< HEAD
                 free(line);
                 printf("exit code: %d\n", exit);
                 (void)exit;
+=======
+>>>>>>> 8ae5426 (Initial Commit)
         }
 }
 
